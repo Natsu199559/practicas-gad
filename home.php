@@ -212,6 +212,16 @@ if (!isset($_SESSION['usuario'])) {
                     </div>
                 </a>
 
+                <a href="./registro/registro-new.php" class="tile">
+                    <div class="tile-tittle">Registro</div>
+                    <div class="tile-icon">
+                        <i class="fas fa-pallet fa-fw"></i>
+                        <p>
+                            Ingreso de Vehículos
+                        </p>
+                    </div>
+                </a>
+
                 <?php
                 $sql = $conexcion->query(" select * from registro");
                 $countregistro = 0;
@@ -219,21 +229,13 @@ if (!isset($_SESSION['usuario'])) {
                     $countregistro = $countregistro + 1;
                 }
                 ?>
-                <a href="./registro/registro-new.php" class="tile">
-                    <div class="tile-tittle">Registro</div>
-                    <div class="tile-icon">
-                        <i class="fas fa-pallet fa-fw"></i>
-                        <p>
-                            <?php echo $countregistro; ?> Registrados
-                        </p>
-                    </div>
-                </a>
-
                 <a href="./reportes/reportes_list.php" class="tile">
                     <div class="tile-tittle">Reportes</div>
                     <div class="tile-icon">
                         <i class="fas fa-clipboard-list fa-fw"></i>
-                        <p>Reportes</p>
+                        <p>
+                            <?php echo $countregistro; ?> Reportes
+                        </p>
                     </div>
                 </a>
 

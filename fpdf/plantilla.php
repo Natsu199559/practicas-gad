@@ -30,6 +30,12 @@ class PDF extends FPDF
     }
 }
 
+//para la fecha
+date_default_timezone_set("America/Guayaquil");
+
+$fecha = date("d");
+$fechames = date("M");
+$fechaaño = date("Y");
 // Creamos el marco
 include "../conexcion_bd/conexcion_bd.php";
 
@@ -49,7 +55,7 @@ $pdf->SetFont('Arial', '', 10);
 $pdf->SetLeftMargin(20);
 $pdf->SetRightMargin(20);
 $pdf->SetY(30); // Establece la posición Y en 50 unidades desde el borde superior
-$pdf->Cell(0, 10, utf8_decode('Riobamba, 7 de febrero de 2024'), 0, 1, 'R');
+$pdf->Cell(0, 10, utf8_decode('Riobamba, ' . $fecha . ' de ' . $fechames . ' de ' . $fechaaño), 0, 1, 'R');
 $pdf->SetY(50);
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->Cell(0, 10, utf8_decode('PARA: ') . $dato_info->registro_elabora_parte, 0, 1, 'L');
@@ -78,13 +84,13 @@ $pdf->SetY(106);
 $pdf->Cell(0, 10, utf8_decode('Fecha de Ingreso: '), 0, 1, 'L');
 $pdf->SetFont('Arial', '', 10);
 $pdf->SetXY(52, 106);
-$pdf->Cell(0, 10, utf8_decode('5/febrero/2024'), 0, 1, 'L');
+$pdf->Cell(0, 10, utf8_decode('05/Feb/2024'), 0, 1, 'L');
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->SetXY(90, 106);
 $pdf->Cell(0, 10, utf8_decode('Fecha de Salida: '), 0, 1, 'L');
 $pdf->SetFont('Arial', '', 10);
 $pdf->SetXY(119, 106);
-$pdf->Cell(0, 10, utf8_decode('9/febrero/2024'), 0, 1, 'L');
+$pdf->Cell(0, 10, utf8_decode($fecha . '/' . $fechames . '/' . $fechaaño), 0, 1, 'L');
 
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->SetY(116);
@@ -122,15 +128,27 @@ $pdf->SetXY(110, 126);
 $pdf->Cell(0, 10, utf8_decode('ALCOHOTECTOR: '), 0, 1, 'L');
 $pdf->SetFont('Arial', '', 10);
 $pdf->SetXY(143, 126);
-$pdf->Cell(0, 10, utf8_decode('(SI)'), 0, 1, 'L');
+$pdf->Cell(0, 10, utf8_decode('(' . $dato_info->registro_alcohotector . ')'), 0, 1, 'L');
 
 
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->SetY(146);
 $pdf->Cell(0, 10, utf8_decode('OBSERVACIONES: '), 0, 1, 'L');
+
+//novedades 1
 $pdf->SetFont('Arial', '', 10);
 $pdf->SetY(156);
 $pdf->MultiCell(0, 10 / $interlineado, utf8_decode($dato_info->registro_novedades));
+
+//novedades 2
+$pdf->SetFont('Arial', '', 10);
+$pdf->SetY(161);
+$pdf->MultiCell(0, 10 / $interlineado, utf8_decode($dato_info->registro_novedades_2));
+
+//novedades 2
+$pdf->SetFont('Arial', '', 10);
+$pdf->SetY(166);
+$pdf->MultiCell(0, 10 / $interlineado, utf8_decode($dato_info->registro_novedades_3));
 
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->SetY(210);
@@ -143,6 +161,10 @@ $pdf->Cell(0, 10, utf8_decode('CORDINADOR DE MOVILIDAD, TRANSITO Y TRANSPORTE ')
 $pdf->SetFont('Arial', 'I', 8);
 $pdf->SetY(250);
 $pdf->Cell(0, 10, utf8_decode('Elaborado por: ACT.') . $dato_info->registro_elabora_parte, 0, 1, 'L');
+
+$pdf->SetFont('Arial', 'I', 8);
+$pdf->SetY(255);
+$pdf->Cell(0, 10, utf8_decode('Anexo: 2 fojas'), 0, 1, 'L');
 
 $pdf->Image('pie_pagina.png', 120, 270, 100);
 $pdf->Image('logo_pie_pagina.png', 15, 275, 50);

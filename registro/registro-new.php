@@ -178,7 +178,7 @@ if (!isset($_SESSION['usuario'])) {
             </div>
             <?php
             include "../conexcion_bd/conexcion_bd.php";
-            //include "../php/registro/agregar_registro.php";
+            include "../php/registro/agregar_registro.php";
             ?>
             <!-- Content -->
             <div class="container-fluid">
@@ -241,9 +241,8 @@ if (!isset($_SESSION['usuario'])) {
                     ?>
                     <form action="" class="form-neon" method="post">
                         <?php
-                        while ($dato = $sql->fetch_object()) {
-
-                            ?>
+                        $dato = $sql->fetch_object();
+                        ?>
                         <br><br><br>
                         <fieldset>
                             <legend><i class="far fa-address-card"></i> &nbsp; Información Personal</legend>
@@ -294,8 +293,8 @@ if (!isset($_SESSION['usuario'])) {
                                                 <option value="" selected="" disabled="">
                                                     Seleccione una de las opciones
                                                 </option>
-                                                <option value="1">Si</option>
-                                                <option value="2">No</option>
+                                                <option value="Si">Si</option>
+                                                <option value="No">No</option>
                                             </select>
                                         </div>
                                     </div>
@@ -351,8 +350,8 @@ if (!isset($_SESSION['usuario'])) {
                                                 <option value="" selected="" disabled="">
                                                     Seleccione una de las opciones
                                                 </option>
-                                                <option value="1">Si</option>
-                                                <option value="2">No</option>
+                                                <option value="Si">Si</option>
+                                                <option value="No">No</option>
                                             </select>
                                         </div>
                                     </div>
@@ -413,122 +412,98 @@ if (!isset($_SESSION['usuario'])) {
                                                 <option value="" selected="" disabled="">
                                                     Seleccione una de las opciones
                                                 </option>
-                                                <option value="1">CRV-1</option>
-                                                <option value="2">CRV-2</option>
+                                                <option value="CRV-1">CRV-1</option>
+                                                <option value="CRV-2">CRV-2</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="registro_causa_retencion" class="bmd-label-floating">Causa de la
-                                                Retención</label>
-                                            <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\- ]{1,35}"
-                                                class="form-control" name="registro_causa_retencion_reg"
-                                                id="registro_causa_retencion" maxlength="20" value="">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="registro_elabora_parte" class="bmd-label-floating">Elabora
-                                                Parte</label>
-                                            <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]{1,35}"
-                                                class="form-control" name="registro_elabora_parte_reg"
-                                                id="registro_elabora_parte" maxlength="35" value="">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="registro_lugar" class="bmd-label-floating">Lugar</label>
-                                            <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]{1,35}"
-                                                class="form-control" name="registro_lugar_reg" id="registro_lugar"
-                                                maxlength="35" value="">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-12">
-                                        <div class="form-group">
-                                            <label for="registro_novedades" class="bmd-label-floating">Novedades</label>
-                                            <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]{0,1000}"
-                                                class="form-control" name="registro_novedades_reg"
-                                                id="registro_novedades" maxlength="1000" value="">
+                            <fieldset>
+                                <legend style=" margin-top: 40px;"><i class="fas fa-info"></i> &nbsp; Datos de Retención
+                                </legend>
+                                <legend><i class="fas fa-medal"></i> &nbsp; Uso del Alcohotector</legend>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <select class="form-control" name="registro_alcohotector_reg">
+                                                    <option value="" selected="" disabled="">
+                                                        Seleccione una de las opciones
+                                                    </option>
+                                                    <option value="Si">Si</option>
+                                                    <option value="No">No</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </fieldset>
-                        <br><br><br>
-                        <p class="text-center" style="margin-top: 40px;">
-                            <button type="submit" class="btn btn-raised btn-success btn-sm"><i class="fas fa-sync-alt"
-                                    value="ok" name="btn-registrar"></i>
-                                &nbsp; Ingresar nuevo registro</button>
-                        </p>
-                        <?php } ?>
-
-                        <?php
-
-                        if (!empty($_POST["btn-registrar"])) {
-                            if (!empty($_POST["registro_dueño_reg"]) and !empty($_POST["registro_grua_reg"]) and !empty($_POST["registro_cvr_reg"]) and !empty($_POST["registro_causa_retencion_reg"]) and !empty($_POST["registro_elabora_parte_reg"]) and !empty($_POST["registro_novedades_reg"])) {
-
-                                $dni = $_POST['registro_dni_reg'];
-                                $nombre = $_POST['registro_nombre_reg'];
-                                $apellido = $_POST['registro_apellido_reg'];
-
-                                $dueño_si_no = $_POST['registro_dueño_reg'];
-                                $dni_no_propietario = $_POST['registro_dni_nopropietario_reg'];
-                                $nombre_no_propietario = $_POST['registro_nombre_nopropietario_reg'];
-                                $apeliddo_no_propietario = $_POST['registro_apellido_nopropietario_reg'];
-
-                                $grua = $_POST['registro_grua_reg'];
-                                $marca = $_POST['registro_marca_reg'];
-                                $modelo = $_POST['registro_modelo_reg'];
-                                $color = $_POST['registro_color_reg'];
-                                $placa = $_POST['registro_placa_reg'];
-
-                                $crv = $_POST['registro_cvr_reg'];
-                                $causa_retencion = $_POST['registro_causa_retencion_reg'];
-                                $elabora_parte = $_POST['registro_elabora_parte_reg'];
-                                $novedades = $_POST['registro_novedades_reg'];
-                                $lugar = $_POST['registro_lugar_reg'];
-
-                                $sql = $conexcion->query("INSERT INTO registro (`registro_dni`, `registro_nombre`, `registro_apellido`, `registro_dni_nopropietario`, `registro_nombre_nopropietario`, `registro_apellido_nopropietario`, `registro_grua`, `registro_lugar`, `registro_marca`, `registro_color`, `registro_placa`, `registro_modelo`, `registro_causa_detencion`, `registro_elabora_parte`, `registro_novedades`, `registro_si_no_propietario`, `registro_crv`) 
-                                VALUES ('$dni', '$nombre','$apellido','$dni_no_propietario','$nombre_no_propietario','$apeliddo_no_propietario','$grua','$lugar','$marca','$color','$placa','$modelo','$causa_retencion','$elabora_parte','$novedades','$dueño_si_no','$crv')");
-
-                                if ($sql == 1) {
-                                    echo '
-                                        <script type="text/javascript">
-                                            swal({
-                                            title: "Aviso",
-                                            text:"Datos ingresados exitosamente",
-                                            icon: "success",
-                                            });
-                                        </script>
-                                    ';
-                                } else {
-                                    echo '
-                                        <script type="text/javascript">
-                                            swal({
-                                            title: "Advertencia",
-                                            text:"Datos no ingresados",
-                                            icon: "warning",
-                                            });
-                                        </script>
-                                    ';
-                                }
-                            } else {
-                                echo '
-                                <script type="text/javascript">
-                                    swal({
-                                    title: "Advertencia",
-                                    text:"Existen campos vacios",
-                                    icon: "warning",
-                                    });
-                                </script>
-                                ';
-                            }
-                        } ?>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label for="registro_causa_retencion" class="bmd-label-floating">Causa
+                                                    de la
+                                                    Retención</label>
+                                                <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\- ]{1,35}"
+                                                    class="form-control" name="registro_causa_retencion_reg"
+                                                    id="registro_causa_retencion" maxlength="20" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label for="registro_elabora_parte" class="bmd-label-floating">Elabora
+                                                    Parte</label>
+                                                <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]{1,35}"
+                                                    class="form-control" name="registro_elabora_parte_reg"
+                                                    id="registro_elabora_parte" maxlength="35" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label for="registro_lugar" class="bmd-label-floating">Lugar</label>
+                                                <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]{1,35}"
+                                                    class="form-control" name="registro_lugar_reg" id="registro_lugar"
+                                                    maxlength="35" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-12">
+                                            <div class="form-group">
+                                                <label for="registro_novedades" class="bmd-label-floating">Novedad
+                                                    1</label>
+                                                <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]{0,1000}"
+                                                    class="form-control" name="registro_novedades_reg"
+                                                    id="registro_novedades" maxlength="1000" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-12">
+                                            <div class="form-group">
+                                                <label for="registro_novedades" class="bmd-label-floating">Novedad
+                                                    2</label>
+                                                <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]{0,1000}"
+                                                    class="form-control" name="registro_novedades_2_reg"
+                                                    id="registro_novedades" maxlength="1000" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-12">
+                                            <div class="form-group">
+                                                <label for="registro_novedades" class="bmd-label-floating">Novedad
+                                                    3</label>
+                                                <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]{0,1000}"
+                                                    class="form-control" name="registro_novedades_3_reg"
+                                                    id="registro_novedades" maxlength="1000" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <br><br><br>
+                            <p class="text-center" style="margin-top: 40px;">
+                                <button type="submit" class="btn btn-raised btn-success btn-sm" value="ok"
+                                    name="btn-registrar"><i class="fas fa-sync-alt"></i>
+                                    Ingresar nuevo registro</button>
+                            </p>
+                            <?php ?>
                     </form>
                 </div>
                 <nav aria-label="Page navigation example">
@@ -568,9 +543,9 @@ if (!isset($_SESSION['usuario'])) {
     <!-- Bootstrap Material Design V4.0 -->
     <script src="../js/bootstrap-material-design.min.js"></script>
     <script>
-    $(document).ready(function() {
-        $('body').bootstrapMaterialDesign();
-    });
+        $(document).ready(function () {
+            $('body').bootstrapMaterialDesign();
+        });
     </script>
 
     <script src="../js/main.js"></script>

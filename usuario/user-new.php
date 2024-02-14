@@ -298,9 +298,6 @@ if (!isset($_SESSION['usuario'])) {
                         </div>
                     </fieldset>
                     <p class="text-center" style="margin-top: 40px;">
-                        <button type="reset" class="btn btn-raised btn-secondary btn-sm"><i
-                                class="fas fa-paint-roller"></i> &nbsp; LIMPIAR</button>
-                        &nbsp; &nbsp;
                         <button type="submit" class="btn btn-raised btn-info btn-sm" name="btn_guardar" value="ok"><i
                                 class="far fa-save"></i> &nbsp;
                             GUARDAR</button>
@@ -330,9 +327,9 @@ if (!isset($_SESSION['usuario'])) {
     <!-- Bootstrap Material Design V4.0 -->
     <script src="../js/bootstrap-material-design.min.js"></script>
     <script>
-    $(document).ready(function() {
-        $('body').bootstrapMaterialDesign();
-    });
+        $(document).ready(function () {
+            $('body').bootstrapMaterialDesign();
+        });
     </script>
 
     <script src="../js/main.js"></script>
